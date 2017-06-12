@@ -1,0 +1,24 @@
+{
+    "name": "huasituo/laravel-esquery",
+    "description": "EsQuery是基于phpQuery的无比强大的PHP采集工具",
+    "keywords": ["EsQuery","phpQuery"],
+    "homepage": "http://esquery.net",
+    "license" : "MIT",
+    "authors": [
+        {
+            "name": "Huasituo",
+            "email": "info@huasituo.com",
+            "homepage": "http://www.huasituo.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "ext-gd": "*",
+        //"huasituo/laravel-esquery-plugins": "^1.0.0"
+    },
+    "autoload": { 
+        "psr-4": {
+            "Huasituo\\Es\\": "src/"
+        }
+    }
+}
