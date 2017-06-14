@@ -9,6 +9,10 @@
             "name": "Huasituo",
             "email": "info@huasituo.com",
             "homepage": "http://www.huasituo.com"
+        },
+        {
+            "name": "Seven Du",
+            "email": "shiweidu@outlook.com"
         }
     ],
     "require": {
