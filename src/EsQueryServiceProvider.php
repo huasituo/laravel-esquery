@@ -16,18 +16,19 @@ class EsQueryServiceProvider extends ServiceProvider
     /**
      * Bootstrap the application events.
      */
-    public function boot() {
+    public function boot()
+    {
     }
 
     /**
      * Register the service provider.
      */
-    public function register(){
+    public function register()
+    {
         // Temp to use in closure.
         $app = $this->app;
 
-        $this->app['es'] = $this->app->share(function($app)
-        {
+        $this->app['es'] = $this->app->share(function ($app) {
             return new EsQuery($app);
         });
     }
