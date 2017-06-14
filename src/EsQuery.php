@@ -22,7 +22,6 @@ class EsQuery
     private $inputEncoding = null;              //【输入编码格式】明确指定输入的页面编码格式(UTF-8,GB2312,.....)，防止出现乱码,如果设置为 假值 则自动识别
     private $htmlEncoding;                      //采集对象编码格式
     private $removeHead = false;
-    public static $instances;
 
     /**
      *  Create EsQuery instance.
