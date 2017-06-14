@@ -705,7 +705,7 @@ class EsQuery
     {
         $methods = ['query'];
         if (in_array($method, $methods)) {
-            return call_user_func_array([static::getInstance(), $method], $arguments)
+            return call_user_func_array([static::getInstance(), $method], $arguments);
         }
 
         throw new \RuntimeException("The method \"{$method}\" not static.");
