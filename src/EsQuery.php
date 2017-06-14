@@ -3,8 +3,6 @@
 namespace Huasituo\Es;
 
 use phpQuery;
-use Exception;
-use ReflectionClass;
 use Illuminate\Contracts\Foundation\Application as ApplicationContract;
 
 class EsQuery
