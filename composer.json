@@ -1,6 +1,6 @@
 {
     "name": "huasituo/laravel-esquery",
-    "description": "🍳EsQuery 是基于 phpQuery 的无比强大的PHP采集工具",
+    "description": "🕷️ EsQuery 是基于 phpQuery 的无比强大的 PHP 采集工具",
     "keywords": ["EsQuery", "phpQuery", "query"],
     "homepage": "http://esquery.net",
     "license" : "MIT",
