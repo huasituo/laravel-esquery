@@ -35,7 +35,8 @@ class EsQueryTest extends TestCase
     }
 }
 
-class EsQueryTestClass {
+class EsQueryTestClass
+{
     public function run(array $arguments)
     {
         return $arguments;
