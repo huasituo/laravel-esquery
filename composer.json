@@ -24,5 +24,12 @@
         "psr-4": {
             "Huasituo\\Es\\Test\\": "tests/"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Huasituo\\Es\\EsQueryServiceProvider"
+            ]
+        }
     }
 }
