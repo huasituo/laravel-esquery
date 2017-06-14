@@ -59,7 +59,7 @@ class EsQuery
         $arguments = func_get_args();
         array_shift($arguments);
 
-        return $this->app->makeWith($abstract, $arguments);
+        return app($abstract, $arguments);
     }
 
     /**
