@@ -2,6 +2,7 @@
 
 namespace Huasituo\Es;
 
+use phpQuery;
 use Exception;
 use ReflectionClass;
 use Illuminate\Contracts\Foundation\Application as ApplicationContract;
@@ -37,52 +38,31 @@ class EsQuery
     }
 
     /**
-     * 静态方法，访问入口.
-     * @param string $url           要抓取的网页URL地址(支持https);或者是html源代码
-     * @param string $outputEncoding【输出编码格式】指要以什么编码输出(UTF-8,GB2312,.....)，防止出现乱码,如果设置为 假值 则不改变原字符串编码
-     * @param string $inputEncoding 【输入编码格式】明确指定输入的页面编码格式(UTF-8,GB2312,.....)，防止出现乱码,如果设置为 假值 则自动识别
-     * @param bool|false $removeHead 【是否移除页面头部区域】 乱码终极解决方案
+     * Run ext.
+     *
+     * @param string $abstract
+     * @param array $arguments
      * @return mixed
+     * @author Seven Du <shiweidu@outlook.com>
      */
-    public static function Query($page, $outputEncoding = null, $inputEncoding = null, $removeHead = false)
+    public static function run($abstract, array $arguments = [])
     {
-        return  self::getInstance()->_query($page, $outputEncoding, $inputEncoding, $removeHead);
+        return static::getInstance($abstract)->run($arguments);
     }
 
     /**
-     * 运行QueryList扩展.
-     * @param $class
-     * @param array $args
+     * Get or create class instance.
+     *
+     * @param string $abstract
      * @return mixed
-     * @throws Exception
+     * @author Seven Du <shiweidu@outlook.com>
      */
-    public static function run($class, $args = [])
+    public static function getInstance($abstract = 'es')
     {
-        $extension = self::getInstance("{$class}");
+        $arguments = func_get_args();
+        array_shift($arguments);
 
-        return $extension->run($args);
-    }
-
-    /**
-     * 获取任意实例.
-     * @return mixed
-     * @throws Exception
-     */
-    public static function getInstance()
-    {
-        $args = func_get_args();
-        count($args) || $args = ['Huasituo\Es\EsQuery'];
-        $key = md5(serialize($args));
-        echo $className = array_shift($args);
-        if (! class_exists($className)) {
-            throw new Exception("no class {$className}");
-        }
-        if (! isset(self::$instances[$key])) {
-            $rc = new ReflectionClass($className);
-            self::$instances[$key] = $rc->newInstanceArgs($args);
-        }
-
-        return self::$instances[$key];
+        return $this->app->makeWith($abstract, $arguments);
     }
 
     /**
@@ -159,10 +139,19 @@ class EsQuery
      */
     public function setQuery($outputEncoding = null, $inputEncoding = null, $removeHead = false)
     {
-        return $this->_query($this->html, $outputEncoding, $inputEncoding, $removeHead);
+        return $this->query($this->html, $outputEncoding, $inputEncoding, $removeHead);
     }
 
-    private function _query($page, $outputEncoding, $inputEncoding, $removeHead)
+    /**
+     * Request page.
+     *
+     * @param string $page url
+     * @param string|null $outputEncoding
+     * @param string|null $inputEncoding
+     * @param string|null $removeHead
+     * @return $this
+     */
+    public function query($page, $outputEncoding = null, $inputEncoding = null, $removeHead = null)
     {
         $this->data = [];
         $this->url = $this->_isURL($page) ? $page : '';
@@ -702,5 +691,23 @@ class EsQuery
         }
 
         return $appears;
+    }
+
+    /**
+     * Call static method.
+     *
+     * @param string $method
+     * @param array $arguments
+     * @return mixed
+     * @author Seven Du <shiweidu@outlook.com>
+     */
+    public static function __callStatic($method, array $arguments = [])
+    {
+        $methods = ['query'];
+        if (in_array($method, $methods)) {
+            return call_user_func_array([static::getInstance(), $method], $arguments)
+        }
+
+        throw new \RuntimeException("The method \"{$method}\" not static.");
     }
 }
