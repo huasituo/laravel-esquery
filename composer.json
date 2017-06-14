@@ -33,7 +33,10 @@
         "laravel": {
             "providers": [
                 "Huasituo\\Es\\EsQueryServiceProvider"
-            ]
+            ],
+            "aliases": {
+                "EsQuery": "Huasituo\\Es\\EsQuery"
+            }
         }
     }
 }
