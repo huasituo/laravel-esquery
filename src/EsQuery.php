@@ -4,12 +4,14 @@ namespace Huasituo\Es;
 
 use Exception;
 use ReflectionClass;
-use Illuminate\Foundation\Application;
+use Illuminate\Contracts\Foundation\Application as ApplicationContract;
 
 class EsQuery
 {
     /**
-     * @var Application
+     * Container.
+     *
+     * @var \Illuminate\Contracts\Foundation\Application
      */
     protected $app;
 
@@ -24,11 +26,12 @@ class EsQuery
     public static $instances;
 
     /**
-     * Create a new Verify instance.
+     *  Create EsQuery instance.
      *
-     * @param Application         $app
+     * @param \Illuminate\Contracts\Foundation\Application $app
+     * @author Seven Du <shiweidu@outlook.com>
      */
-    public function __construct(Application $app)
+    public function __construct(ApplicationContract $app)
     {
         $this->app = $app;
     }
