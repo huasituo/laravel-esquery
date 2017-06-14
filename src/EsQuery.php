@@ -146,10 +146,10 @@ class EsQuery
      * @param string $page url
      * @param string|null $outputEncoding
      * @param string|null $inputEncoding
-     * @param string|null $removeHead
+     * @param bool $removeHead
      * @return $this
      */
-    public function query($page, $outputEncoding = null, $inputEncoding = null, $removeHead = null)
+    public function query($page, $outputEncoding = null, $inputEncoding = null, $removeHead = false)
     {
         $this->data = [];
         $this->url = $this->_isURL($page) ? $page : '';
